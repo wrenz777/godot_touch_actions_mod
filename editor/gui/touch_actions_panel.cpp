@@ -71,6 +71,7 @@ void TouchActionsPanel::_notification(int p_what) {
 			cut_button->set_button_icon(get_editor_theme_icon(SNAME("ActionCut")));
 			copy_button->set_button_icon(get_editor_theme_icon(SNAME("ActionCopy")));
 			paste_button->set_button_icon(get_editor_theme_icon(SNAME("ActionPaste")));
+			right_click_button->set_button_icon(get_editor_theme_icon(SNAME("InstanceOptions")));
 		} break;
 	}
 }
@@ -311,7 +312,6 @@ TouchActionsPanel::TouchActionsPanel() {
 
 	// Right mouse click simulation button
 	right_click_button = memnew(Button);
-	right_click_button->set_text(TTRC("Right Click"));
 	right_click_button->set_theme_type_variation("FlatMenuButton");
 	right_click_button->set_accessibility_name(TTRC("Right Click"));
 	right_click_button->set_focus_mode(FOCUS_ACCESSIBILITY);

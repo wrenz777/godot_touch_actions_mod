@@ -32,6 +32,7 @@
 
 #include "scene/gui/panel_container.h"
 
+
 class BoxContainer;
 class Button;
 class TextureRect;
@@ -77,6 +78,7 @@ private:
 
 	void _simulate_editor_shortcut(const String &p_shortcut_name);
 	void _simulate_key_press(Key p_keycode);
+	void _simulate_right_click();
 	void _on_drag_handle_gui_input(const Ref<InputEvent> &p_event);
 	void _switch_layout();
 	void _lock_panel_toggled(bool p_pressed);
