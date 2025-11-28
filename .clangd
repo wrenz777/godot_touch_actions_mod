@@ -20,7 +20,9 @@ CompileFlags:
     - -Wno-unused-const-variable
     - -Wno-unused-function
     - -Wno-unused-variable
-    - "I/workspaces/**"
+    - "-I/workspaces/godot_touch_actions_mod/core"
+    - "-I/workspaces/godot_touch_actions_mod/editor"
+    - "-I/workspaces/godot_touch_actions_mod/scene"
 ---
 # Suppress all third-party warnings.
 
