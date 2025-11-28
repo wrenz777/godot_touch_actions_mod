@@ -40,6 +40,7 @@
 #include "scene/resources/style_box_flat.h"
 
 void TouchActionsPanel::_notification(int p_what) {
+	
 	switch (p_what) {
 		case NOTIFICATION_ENTER_TREE: {
 			DisplayServer::get_singleton()->set_hardware_keyboard_connection_change_callback(callable_mp(this, &TouchActionsPanel::_hardware_keyboard_connected));
@@ -109,6 +110,17 @@ void TouchActionsPanel::_simulate_key_press(Key p_keycode) {
 	event.instantiate();
 	event->set_keycode(p_keycode);
 	event->set_pressed(true);
+	Input::get_singleton()->parse_input_event(event);
+}
+
+void TouchActionsPanel::_simulate_right_click() {
+	Ref<InputEventMouseButton> event;
+	event.instantiate();
+	event->set_button_index(MouseButton::RIGHT);
+	event->set_pressed(true);
+	Input::get_singleton()->parse_input_event(event);
+	// send release to complete the click
+	event->set_pressed(false);
 	Input::get_singleton()->parse_input_event(event);
 }
 
@@ -296,6 +308,16 @@ TouchActionsPanel::TouchActionsPanel() {
 	cut_button = _add_new_action_button("ui_cut", TTRC("Cut"));
 	copy_button = _add_new_action_button("ui_copy", TTRC("Copy"));
 	paste_button = _add_new_action_button("ui_paste", TTRC("Paste"));
+
+	// Right mouse click simulation button
+	right_click_button = memnew(Button);
+	right_click_button->set_text(TTRC("Right Click"));
+	right_click_button->set_theme_type_variation("FlatMenuButton");
+	right_click_button->set_accessibility_name(TTRC("Right Click"));
+	right_click_button->set_focus_mode(FOCUS_ACCESSIBILITY);
+	right_click_button->set_icon_alignment(HORIZONTAL_ALIGNMENT_CENTER);
+	right_click_button->connect(SceneStringName(pressed), callable_mp(this, &TouchActionsPanel::_simulate_right_click));
+	box->add_child(right_click_button);
 
 	_add_new_modifier_button(MODIFIER_CTRL);
 	_add_new_modifier_button(MODIFIER_SHIFT);
