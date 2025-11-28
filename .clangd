@@ -20,6 +20,7 @@ CompileFlags:
     - -Wno-unused-const-variable
     - -Wno-unused-function
     - -Wno-unused-variable
+    - "I/workspaces/*/**"
 ---
 # Suppress all third-party warnings.
 
